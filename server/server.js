@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 const url = process.env.URL;
 const dbStart = require('./config/db');
 const cors = require('cors');
+const errorHandler = require('./middleware/errorHandler');
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +16,8 @@ app.get('/', (req, res) => {
 });
 
 dbStart(url);
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log('Server running');
