@@ -3,7 +3,7 @@ const errorHandler = (error, req, res, next) => {
   error.statusCode = error.statusCode || 500;
 
   if (error.name === 'MongoServerError') {
-    switch (err.code) {
+    switch (error.code) {
       case 11000: {
         error.message = 'Duplicate key Error';
         error.statusCode = 409;

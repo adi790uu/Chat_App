@@ -28,7 +28,10 @@ const registerUser = asyncHandler(async (req, res) => {
   const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '24h' });
 
   if (newUser) {
-    return res.status(201).json({ msg: 'User Created', token: token });
+    console.log(token);
+    return res
+      .status(201)
+      .json({ msg: 'User Created', token: token, newUser: newUser });
   }
   throw new AppError({ msg: 'Some error occured' });
 });
@@ -52,33 +55,49 @@ const authUser = asyncHandler(async (req, res) => {
   const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '24h' });
   const isMatch = await bcrypt.compare(password, user.password);
   if (isMatch) {
-    return res.status(200).json({ msg: 'User logged in', token: token });
+    console.log(token);
+    return res
+      .status(200)
+      .json({ msg: 'User logged in', token: token, user: user });
   }
   throw new AppError('Password is invalid', 401);
 });
 
-const getUser = asyncHandler(async (req, res) => {
-  const userId = req.user;
-  const keyword = req.query.keyword;
-  let user;
-
-  if (keyword) {
-    user = await User.findById(keyword)
-      .populate('likes')
-      .populate('favorites')
-      .populate('postsCreated');
-  } else {
-    user = await User.findById(userId)
-      .populate('likes')
-      .populate('favorites')
-      .populate('postsCreated');
-  }
-
-  if (user) {
-    return res.json({ msg: 'Success', user: user });
-  }
-
-  res.json({ msg: 'Failed' });
+const searchUsers = asyncHandler(async (req, res) => {
+  const searchQuery = req.query.search;
+  console.log(searchQuery);
+  const currentUser = req.user;
+  const users = await User.find({
+    _id: { $ne: currentUser },
+    username: { $regex: searchQuery, $options: 'i' },
+  });
+  // console.log(users);
+  res.json({ users: users });
 });
 
-module.exports = { registerUser, authUser, getUser };
+const getFriends = asyncHandler(async (req, res) => {
+  const userId = req.user;
+  const friends = await User.findById(userId).populate('friends');
+  res.json({ msg: 'Success', friends: friends });
+});
+
+const addFriend = asyncHandler(async (req, res) => {
+  const { friendId } = req.body;
+
+  const myId = req.user;
+  const user = await User.findOneAndUpdate(
+    { _id: myId },
+    { $push: { friends: friendId } },
+    { new: true }
+  );
+
+  const friend = await User.findOneAndUpdate(
+    { _id: friendId },
+    { $push: { friends: myId } },
+    { new: true }
+  );
+
+  res.json({ msg: 'Success', user: user });
+});
+
+module.exports = { registerUser, authUser, getFriends, searchUsers, addFriend };

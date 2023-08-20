@@ -9,34 +9,18 @@ const userSchema = new mongoose.Schema(
       required: true,
       index: 'text',
     },
-    postsCreated: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post',
-      },
-    ],
     password: {
       type: String,
       required: true,
     },
-    likes: [
+    friends: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post',
+        ref: 'User',
       },
     ],
-    favorites: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post',
-      },
-    ],
-    admin: {
-      type: Boolean,
-      default: false,
-    },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const User = mongoose.model('User', userSchema);

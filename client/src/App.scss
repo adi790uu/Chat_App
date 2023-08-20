@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&family=Ysabeau+SC:wght@300&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.home {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Ubuntu', sans-serif;
+  color: #111111;
+
+  .container {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #111111;
+    box-shadow: 2px 2px 40px #2f2f2f;
+
+    .sideBar {
+      flex: 1;
+      overflow: auto;
+      overflow-x: hidden;
+      background-color: darkslategray;
+
+      .Navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+
+        .title {
+          padding: 10px;
+          letter-spacing: 1.3px;
+          font-size: 1.3rem;
+          font-weight: bold;
+          color: #f9f9f9;
+        }
+
+        .userInfo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 24px;
+            height: 24px;
+            border-radius: 100%;
+            object-fit: cover;
+          }
+          span {
+            padding: 6px;
+            margin-left: 1px;
+            color: #f9f9f9;
+          }
+        }
+      }
+      .chats {
+        margin-top: 20px;
+      }
+      .searchUser {
+        display: flex;
+        justify-content: center;
+        border-top: 2px solid rgb(220, 219, 219);
+
+        input {
+          width: 85%;
+          margin-top: 15px;
+          height: 45px;
+          outline: none;
+          border: none;
+          background: #d1d1d1;
+          box-shadow: 6px 6px 2px crimson;
+          padding: 7px;
+          border-radius: 5px;
+          border-top: 2px solid black;
+          font-size: 1rem;
+        }
+        ::placeholder {
+          color: black;
+          font-family: 'Ysabeau SC', sans-serif;
+          letter-spacing: 1.1px;
+          font-weight: 600;
+        }
+      }
+    }
+    .logImg {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      margin-right: 10px;
+    }
+    .dropdown-content {
+      padding: 5px;
+      background-color: white;
+      border-radius: 3px;
+      margin-right: 2px;
+      .logOut {
+        padding: 3px;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        font-family: 'Ubuntu', sans-serif;
+      }
+      .logOut:hover {
+        background-color: lightcyan;
+        border-radius: 5px;
+      }
+    }
+    .myMessage {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .myMessage .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .myMessage {
+      justify-content: flex-end;
+    }
+    .msgUser {
+      font-size: 1.1rem;
+      padding-left: 3px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid darkslategrey;
+    }
+    .msgContent {
+      font-size: 0.9rem;
+      padding: 3px;
+      letter-spacing: 0.2px;
+      word-wrap: break-word;
+    }
+    .maincon {
+      width: 40%;
+      padding: 2px;
+      background-color: white;
+      border: 2px solid #2f2f2f;
+      border-radius: 6px;
+    }
+    .chatBox {
+      flex: 2;
+      background-color: antiquewhite;
+      overflow: auto;
+      overflow-x: hidden;
+      border-left: 2px solid #111111;
+
+      .infoBar {
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: darkslategrey;
+        border-bottom: 2px solid #111111;
+        // border-left: 2px solid #111111;
+
+        .userName {
+          margin-left: 10px;
+          color: #f9f9f9;
+          font-size: 1.3rem;
+          text-align: center;
+        }
+
+        .receiver {
+          width: 40px;
+          height: 40px;
+          border-radius: 100%;
+        }
+      }
+      .MessageArea {
+        width: 100%;
+        height: 70%;
+        padding: 10px;
+        overflow-y: auto;
+        // border-left: 2px solid #111111;
+      }
+
+      .input-container {
+        top: 100%;
+        position: sticky;
+        display: flex;
+        bottom: 0;
+        padding: 15px;
+        background-color: darkslategrey;
+        justify-content: center;
+        border-top: 2px solid #111111;
+        // border-left: 2px solid #111111;
+
+        .input-field {
+          width: 80%;
+          height: 2.5rem;
+          padding: 5px;
+          border: none;
+          border-radius: 7px;
+          outline: none;
+          border: 2px solid #2f2f2f;
+        }
+
+        .but {
+          background-color: white;
+          outline: none;
+          border-radius: 100%;
+          padding: 4px;
+          margin-left: 4px;
+          font-family: 'Ubuntu', sans-serif;
+          border: 2px solid black;
+        }
+        .but:hover {
+          background: antiquewhite;
+        }
+      }
+    }
+
+    .chat {
+      display: flex;
+      padding: 15px;
+      background-color: white;
+      color: rgb(49, 48, 48);
+      border-bottom: 1px solid rgb(49, 48, 48);
+      transition: 0.4s;
+
+      .friendImg {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+      }
+      .userInfo {
+        margin-left: 6px;
+        padding-top: 5px;
+      }
+      .name {
+        font-weight: 700;
+        font-size: 1.3rem;
+      }
+      .latestMessage {
+        margin-top: 2px;
+        font-size: 0.9rem;
+        color: rgb(49, 48, 48);
+      }
+
+      &:hover {
+        background-color: antiquewhite;
+      }
+    }
+  }
+}
