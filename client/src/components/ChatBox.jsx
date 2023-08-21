@@ -13,19 +13,9 @@ const socket = io('http://localhost:4000');
 const ChatBox = () => {
   const { user } = ChatState();
   const loggedUser = localStorage.getItem('loggedUser');
-  const { setMessages, messages } = MessageState();
+  const { messages, setMessages } = MessageState();
   const [message, setMessage] = useState('');
-  const [sender, setSender] = useState('');
-
-  socket.on('message', ({ message, sender }) => {
-    // console.log(sender);
-    setSender(sender);
-    const data3 = {
-      sender: sender,
-      message: message,
-    };
-    setMessages(prevMessages => [...prevMessages, data3]);
-  });
+  // const [sender, setSender] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -37,6 +27,17 @@ const ChatBox = () => {
     }
   }, [user]);
 
+  socket.on('message', ({ message, sender }) => {
+    // console.log(sender);
+    // setSender(sender);
+    const data3 = {
+      sender: sender,
+      message: message,
+      class: 'friend',
+    };
+    setMessages([...messages, data3]);
+  });
+
   const handleSend = e => {
     e.preventDefault();
     const data = {
@@ -47,11 +48,12 @@ const ChatBox = () => {
     const data2 = {
       sender: 'You',
       message: message,
+      class: 'me',
     };
 
     if (user && message) {
+      setMessages([...messages, data2]);
       socket.emit('sendMessage', data);
-      setMessages(prevMessages => [...prevMessages, data2]);
       setMessage('');
       // console.log(messages);
     }

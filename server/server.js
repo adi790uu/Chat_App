@@ -7,6 +7,7 @@ const dbStart = require('./config/db');
 const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
 const { Server } = require('socket.io');
+const Messages = require('./models/messageSchema');
 const User = require('./models/userSchema');
 
 const myself = async myId => {
@@ -51,17 +52,20 @@ io.on('connection', socket => {
 
   socket.on('joinRoom', data => {
     const roomName = getRoomName(data.friendId, data.myself);
-    console.log(roomName);
+    // console.log(roomName);
     socket.join(roomName);
   });
 
   socket.on('sendMessage', async data => {
-    console.log(data.user, data.message);
-    console.log(data.loggedIn);
+    // console.log(data.user, data.message);
+    // console.log(data.loggedIn);
     const sender = await myself(data.loggedIn);
-    console.log(sender);
+    // console.log(sender);
     const roomName = getRoomName(data.user._id, data.loggedIn);
-    io.to(roomName).emit('message', { message: data.message, sender: sender });
+    console.log(roomName);
+    socket
+      .to(roomName)
+      .emit('message', { message: data.message, sender: sender });
   });
 
   socket.on('disconnect', () => {

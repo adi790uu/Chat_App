@@ -13,7 +13,7 @@
   color: #111111;
 
   .container {
-    width: 80%;
+    width: 50%;
     height: 70%;
     display: flex;
     border-radius: 10px;
@@ -25,13 +25,15 @@
       flex: 1;
       overflow: auto;
       overflow-x: hidden;
-      background-color: darkslategray;
+      background-color: darkslategrey;
+      max-width: 20%;
 
       .Navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-top: 10px;
+        // background-color: cadetblue;
 
         .title {
           padding: 10px;
@@ -115,6 +117,14 @@
       display: flex;
       align-items: center;
       margin-bottom: 15px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .myMsg {
+      justify-content: flex-end;
+    }
+    .friendMsg {
+      justify-content: flex-start;
     }
     .myMessage .avatar {
       width: 30px;
@@ -122,27 +132,28 @@
       border-radius: 50%;
       margin-right: 10px;
     }
-    .myMessage {
-      justify-content: flex-end;
-    }
+    // .myMessage {
+    //   justify-content: flex-end;
+    // }
     .msgUser {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       padding-left: 3px;
       padding-bottom: 3px;
-      border-bottom: 1px solid darkslategrey;
+      // border-bottom: 1px solid darkslategrey;
     }
     .msgContent {
-      font-size: 0.9rem;
+      font-size: 1rem;
       padding: 3px;
       letter-spacing: 0.2px;
       word-wrap: break-word;
+      font-weight: 400;
     }
     .maincon {
-      width: 40%;
-      padding: 2px;
-      background-color: white;
+      width: 30%;
+      padding: 10px;
+      background-color: rgb(254, 254, 254);
       border: 2px solid #2f2f2f;
-      border-radius: 6px;
+      border-radius: 18px;
     }
     .chatBox {
       flex: 2;
@@ -175,7 +186,7 @@
       }
       .MessageArea {
         width: 100%;
-        height: 70%;
+        height: calc(88% - 40px);
         padding: 10px;
         overflow-y: auto;
         // border-left: 2px solid #111111;

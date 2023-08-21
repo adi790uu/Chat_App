@@ -5,7 +5,7 @@ import { MessageState } from '../Context/MessageProvider';
 
 const Chat = ({ chat }) => {
   // console.log(chat);
-  const { user, setUser } = ChatState();
+  const { setUser } = ChatState();
   const { setMessages } = MessageState();
 
   const handleClick = () => {
