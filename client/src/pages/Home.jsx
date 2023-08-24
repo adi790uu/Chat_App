@@ -10,13 +10,12 @@ const Home = () => {
   if (!token) {
     window.location.href = '/';
   }
-  const { friends, setFriends } = FriendsDispState();
+  const { setFriends } = FriendsDispState();
   useEffect(() => {
     const fetchFriends = async () => {
       const token = localStorage.getItem('token');
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const response = await api.get('/users/friends');
-      // console.log(response);
       setFriends(response.data.friends.friends);
     };
     fetchFriends();

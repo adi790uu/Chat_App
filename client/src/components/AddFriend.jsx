@@ -8,22 +8,19 @@ import api from '../api';
 
 const Chat = ({ chat }) => {
   console.log(chat);
-  const { user, setUser } = ChatState();
+  const { setUser } = ChatState();
   const { setMessages } = MessageState();
-  const { friend, setFriend } = SearchState();
+  const { setFriend } = SearchState();
   const { friends, setFriends } = FriendsDispState();
 
   const handleClick = async () => {
     const response = await api.post('/users/add', {
       friendId: chat._id,
     });
-    // console.log(response);
     setUser(chat);
     setFriend('');
     setFriends([...friends, chat]);
-    // console.log(friends);
     setMessages([]);
-    // console.log(user);
   };
   return (
     <>

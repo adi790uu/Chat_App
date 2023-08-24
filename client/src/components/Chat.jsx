@@ -4,14 +4,12 @@ import { ChatState } from '../Context/ChatProvider';
 import { MessageState } from '../Context/MessageProvider';
 
 const Chat = ({ chat }) => {
-  // console.log(chat);
   const { setUser } = ChatState();
   const { setMessages } = MessageState();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setUser(chat);
     setMessages([]);
-    // console.log(user);
   };
   return (
     <>

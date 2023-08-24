@@ -6,7 +6,6 @@ const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
   const [user, setUser] = useState();
-  // const [messages, setMessages] = useState([]);
 
   return (
     <ChatContext.Provider value={{ user, setUser }}>

@@ -7,6 +7,7 @@ const messageSchema = new mongoose.Schema(
       {
         msg: 'String',
         sender: 'String',
+        class: 'String',
       },
     ],
   },

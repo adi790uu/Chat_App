@@ -4,13 +4,7 @@ import { SearchState } from '../Context/SearchProvider';
 import { SearchUserState } from '../Context/SearchUserProvider';
 
 const SearchResults = () => {
-  //  const users = [
-  //   {
-  //     id: 1,
-  //     name: 'Aditya',
-  //   },
-  // ];
-  const { searched, setSearched } = SearchUserState();
+  const { searched } = SearchUserState();
   console.log(searched);
 
   return (

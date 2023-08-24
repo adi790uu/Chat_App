@@ -16,6 +16,10 @@ const myself = async myId => {
   return loggName.username;
 };
 
+const getRoomName = (friendId, myId) => {
+  return friendId < myId ? `${friendId}-${myId}` : `${myId}-${friendId}`;
+};
+
 app.use(
   cors({
     origin: 'http://localhost:5173', // Allow requests from this origin
@@ -31,6 +35,16 @@ app.get('/', (req, res) => {
   res.json({ msg: 'Api working...' });
 });
 
+app.post('/api/v1/getMessages', async (req, res) => {
+  const data = req.body;
+  console.log(data);
+  const roomName = getRoomName(data.friendId, data.myself);
+
+  const messages = await Messages.find({ roomId: roomName });
+  // console.log(messages);
+  res.json({ success: true, data: messages });
+});
+
 const server = app.listen(port, () => {
   console.log('Server running');
 });
@@ -43,10 +57,6 @@ const io = new Server(server, {
   },
 });
 
-const getRoomName = (friendId, myId) => {
-  return friendId < myId ? `${friendId}-${myId}` : `${myId}-${friendId}`;
-};
-
 io.on('connection', socket => {
   console.log(`User connected! ${socket.id}`);
 
@@ -58,11 +68,26 @@ io.on('connection', socket => {
 
   socket.on('sendMessage', async data => {
     // console.log(data.user, data.message);
-    // console.log(data.loggedIn);
+    console.log(data);
     const sender = await myself(data.loggedIn);
     // console.log(sender);
     const roomName = getRoomName(data.user._id, data.loggedIn);
     console.log(roomName);
+    // const room = await Messages.findOne({ roomId: roomName });
+
+    const res = await Messages.findOneAndUpdate(
+      { roomId: roomName },
+      {
+        $addToSet: {
+          messages: {
+            msg: data.message,
+            sender: sender,
+          },
+        },
+      },
+      { upsert: true, new: true }
+    );
+
     socket
       .to(roomName)
       .emit('message', { message: data.message, sender: sender });

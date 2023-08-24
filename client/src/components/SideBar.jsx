@@ -8,7 +8,7 @@ import api from '../api';
 
 const SideBar = () => {
   const { friend, setFriend } = SearchState();
-  const { searched, setSearched } = SearchUserState();
+  const { setSearched } = SearchUserState();
 
   const searchUserHandler = async e => {
     e.preventDefault();
@@ -23,7 +23,6 @@ const SideBar = () => {
       },
     });
     setSearched(response.data.users);
-    // console.log(searched);
     console.log(response);
   };
   return (

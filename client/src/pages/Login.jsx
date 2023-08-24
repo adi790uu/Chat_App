@@ -10,7 +10,6 @@ const Signup = () => {
   const token = localStorage.getItem('token');
 
   if (token) {
-    // console.log(token);
     window.location.href = '/home';
     return;
   }

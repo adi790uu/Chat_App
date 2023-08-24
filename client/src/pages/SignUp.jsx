@@ -6,12 +6,9 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
   if (token) {
-    // console.log(token);
     window.location.href = '/home';
     return;
   }
@@ -28,7 +25,6 @@ const Signup = () => {
     console.log(response);
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('loggedUser', response.data.newUser._id);
-    // navigate('/home');
     setUsername('');
     setPassword('');
   };
