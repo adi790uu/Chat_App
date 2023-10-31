@@ -17,7 +17,7 @@ const Chat = ({ chat }) => {
         <img className="friendImg" src={myImage} />
         <div className="userInfo">
           <p className="name">{chat.username}</p>
-          <p className="latestMessage">Latest message</p>
+          {/* <p className="latestMessage">{messages[messages.length - 1].msg}</p> */}
         </div>
       </div>
     </>
